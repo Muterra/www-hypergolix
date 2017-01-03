@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hypergolix is programmable cloud sync. It's like Dropbox, except instead of using it from the filesystem, you embed it directly in your applications.">
+    <meta name="author" content="Muterra, Inc">
+    <link rel="canonical" href="https://www.hypergolix.com/register.html">
+  
+    <!-- Start OG -->
+    <meta property="og:title"              content="Hypergolix" />
+    <meta property="og:description"        content="Hypergolix is programmable cloud sync. It's like Dropbox, except instead of using it from the filesystem, you embed it directly in your applications." />
+    <meta property="og:image"              content="https://www.hypergolix.com/img/og-image.jpg" />
+    <meta property="og:url"                content="https://www.hypergolix.com/register.html" />
+    <meta property="og:type"               content="website" />
+    <!-- End OG -->
+
+    <title>Hypergolix - programmable cloud sync</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/standardize.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+    <meta name="msapplication-TileColor" content="#b31b00">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+    
+    <!-- Stripe stuff -->
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="js/base64.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            var stripeHandler = StripeCheckout.configure({
+                panelLabel: 'Subscribe',
+                image: '/apple-touch-icon-180x180.png',
+                name: 'Hypergolix',
+                description: 'Monthly fingerprint subscription',
+                amount: 1000,
+                locale: 'auto',
+                zipCode: true,
+                billingAddress: true,
+
+                key: 'pk_test_DFjoS1pH6t5v6I7BwbL8Hcwr',
+                // key: 'pk_live_Ur4nhCpzRn8QaTArtylNZWpQ',
+                token: function(token, args) {
+                // Get the token
+                $('#stripe-token').value = token.id;
+                // Get the email
+                $('#stripe-email').value = token.email;
+                // Ignore the args (less PII and we aren't using it)
+                $('#stripe-form').submit();
+                }
+            });
+            
+            var fingerprintFlash = function() {
+                $('#fingerprint').addClass("input-fail");
+                $('#fingerprint').val('')
+                t = setTimeout(function () {
+                    $('#fingerprint').removeClass("input-fail");
+                }, 500);
+            }
+
+            document.getElementById('stripe-checkout').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Attempt to decode and validate the fingerprint
+                try {
+                    var fingerprint = Base64.decode($('#fingerprint').val())
+                    
+                    if (fingerprint.length != 65) {
+                        var validated = false
+                    }
+                    else {
+                        var validated = true
+                    }
+                }
+                
+                // If decoding fails, it's invalid
+                catch(err) {
+                    window.alert(err.message)
+                    var validated = false
+                }
+                
+                // Don't open checkout if validation fails
+                if (validated == false) {
+                    fingerprintFlash()
+                }
+                
+                // Validation succeeded; proceed with checkout
+                // Note that this doesn't necessarily mean the fingerprint exists,
+                // just that it's the correct format and length
+                else {
+                    stripeHandler.open();
+                }
+            });
+
+            // Close Checkout on page navigation:
+            window.addEventListener('popstate', function() {
+              stripeHandler.close();
+            });
+            
+            // Auto-fill the fingerprint from the search string
+            $('#fingerprint').val(document.location.search.substring(1))
+        });
+    </script>
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="/#page-top">
+                    <span class="light">use</span> hypergolix
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/#demo">Demo</a>
+                    </li>
+                    <li>
+                        <a href="/#about">About</a>
+                    </li>
+                    <li>
+                        <a href="/#team">Team</a>
+                    </li>
+                    <li>
+                        <a href="/#contact">Contact</a>
+                    </li>
+                    <li>
+                        <a class="navbar-emphasis page-scroll" href="#page-top">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-overlay">
+        </div>
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <h1 class="brand-heading">Hypergolix</h1>
+                        <p class="intro-text">Programmable cloud sync.</p>
+                        <p class="doubleplusloud">All pricing subject to change, particularly during developer preview.
+                        </p>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4 col-pricing">
+                        <div class="row">
+                            <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-1 col-md-12 col-md-offset-0">
+                                <span class="about-badge">
+                                    <i class="fa fa-download fa-inverse"></i>
+                                </span>
+                                <h4 class="service-heading">Read-only</h4>
+                            </div>
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-md-12 col-md-offset-0">
+                                <ul class="pricing">
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-usd fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Free</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-users fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">One user per account</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-arrow-down fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Unlimited data receipt</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-arrow-up fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">10MB data storage</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-times fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Non-commercial use</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-times fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Limited support</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a href="https://pyhgx.readthedocs.io/en/latest/index.html" class="btn btn-default btn-lg">Get started</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-pricing">
+                        <div class="row">
+                            <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-1 col-md-12 col-md-offset-0">
+                                <span class="about-badge">
+                                    <i class="fa fa-user fa-inverse"></i>
+                                </span>
+                                <h4 class="service-heading">Per-fingerprint</h4>
+                            </div>
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-md-12 col-md-offset-0">
+                                <ul class="pricing">
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-usd fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">$10 USD per month</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-users fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">One user per account</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-arrow-down fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Unlimited data receipt</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-arrow-up fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">25GB data storage</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-asterisk fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Limited commercial use</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-times fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Limited support</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Begin checkout form -->
+                        <form id="stripe-form" action="https://papr.hypergolix.com/hgx/" method="post">
+                            <div class="row">
+                                <input class="input-text" type="text" id="fingerprint" name="fingerprint" placeholder="Fingerprint" required />
+                            </div>
+                            <div class="row">
+                                <input type=hidden id="stripe-token" name="stripeToken" required />
+                                <input type=hidden id="stripe-email" name="stripeEmail" required />
+                                <button class="btn btn-default btn-lg" id="stripe-checkout" type="submit">Register</button>
+                            </div>
+                        </form>
+                        <!-- End checkout form -->
+                    </div>
+                    <div class="col-md-4 col-pricing">
+                        <div class="row">
+                            <div class="col-xs-12 col-xs-offset-0 col-sm-4 col-sm-offset-1 col-md-12 col-md-offset-0">
+                                <span class="about-badge">
+                                    <i class="fa fa-briefcase fa-inverse"></i>
+                                </span>
+                                <h4 class="service-heading">Commercial</h4>
+                            </div>
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-md-12 col-md-offset-0">
+                                <ul class="pricing">
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-usd fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Contact for pricing</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-users fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Multiple users per account</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-arrow-down fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Unlimited data receipt</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-arrow-up fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Negotiable data storage</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-check fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Full commercial use</span>
+                                    </li>
+                                    <li>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-circle fa-stack-2x stack-under"></i>
+                                            <i class="fa fa-check fa-stack-1x"></i>
+                                        </span>
+                                        <span class="li-content">Commercial support</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a class="btn btn-default btn-lg" href="mailto:sales@hypergolix.com">sales@hypergolix.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; 2017 <a href="https://www.muterra.io">Muterra, Inc</a>.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

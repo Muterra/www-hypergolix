@@ -91,16 +91,19 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#demo">Demo</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#demo">Demo</a>
+                        <a class="page-scroll" href="#about">About</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#team">Team</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                    <li>
+                        <a class="navbar-emphasis" href="/register.html">Register</a>
                     </li>
                 </ul>
             </div>
@@ -126,7 +129,7 @@
                                     <input class="btn" type="email" id="mce-EMAIL" name="EMAIL" placeholder="email@example.com">
                                 </div>
                                 <div class="row">
-                                    <button class="btn" id="mc-embedded-subscribe" type="submit">I'm interested</button>
+                                    <button class="btn" id="mc-embedded-subscribe" type="submit">Keep me posted</button>
                                 </div>
                                 <div aria-hidden="true" style="height: 0; width: 0; margin: 0; padding: 0; font-size: 0; display: inline; overflow: hidden; position:absolute; left: -9999px;">
                                     <input aria-hidden="true" style="height: 0; width: 0; margin: 0; padding: 0; font-size: 0; display: inline; overflow: hidden; position:absolute; left: -9999px;" type="text" name="b_657c50148ecaf8c628e366ecc_b9df82ad9a" tabindex="-1" value="">
@@ -134,67 +137,62 @@
                             </form>
                         </div>
                         <!-- End mailchimp form -->
-                        <div class="row">
-                            <a href="#about" class="btn btn-circle page-scroll learnmore">
-                                <div class="chevrons"></div>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="container content-section text-center">
+    <!-- Demo Section -->
+    <section id="demo" class="container content-section text-center">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center">
-                <h2 class="section-heading">About Hypergolix</h2>
-                <h3 class="section-subheading">Hypergolix is like Dropbox, except instead of using it from a filesystem, you embed it directly in your applications. Push changes to the cloud at any time, and they automatically update everywhere else.</h3>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-md-4 col-about">
-                <span class="about-badge">
-                    <i class="fa fa-plane fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Resilient</h4>
-                <p class="text-muted">Hypergolix automatically reverts to local networks if your internet connection fails.</p>
-                <a href="https://github.com/Muterra/py_hypergolix_demos" class="btn btn-default btn-lg">See examples</a>
-            </div>
-            <div class="col-md-4 col-about">
-                <span class="about-badge">
-                    <i class="fa fa-users fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Sharable</h4>
-                <p class="text-muted">Hypergolix lets you send anything to anyone at any time, with only a single line of code.</p>
-                <a href="http://pyhgx.readthedocs.io/en/latest/tuts-2-sharing.html" class="btn btn-default btn-lg">Learn more</a>
-            </div>
-            <div class="col-md-4 col-about">
-                <span class="about-badge">
-                    <i class="fa fa-lock fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Secure</h4>
-                <p class="text-muted">Hypergolix encrypts all data client-side, and it stays private until explicitly shared.</p>
-                <a href="https://github.com/Muterra/doc-golix/blob/master/security-whitepaper.md" class="btn btn-default btn-lg">Read the whitepaper</a>
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2 class="section-heading">Hypergolix demo</h2>
+                <div class="row">
+                    <div class="video-wrap">
+                        <iframe width="780" height="439" src="https://www.youtube-nocookie.com/embed/Q4hTg0Tumz0?rel=0" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <a href="http://pyhgx.readthedocs.io/en/latest/index.html" class="btn btn-default btn-lg">Read the docs</a>
             </div>
         </div>
     </section>
 
-    <!-- Demo Section -->
-    <section id="demo" class="content-section text-center">
+    <!-- About Section -->
+    <section id="about" class="content-section text-center">
         <div class="demo-overlay">
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2 class="section-heading">Hypergolix demo</h2>
-                    <div class="row">
-                        <div class="video-wrap">
-                            <iframe width="780" height="439" src="https://www.youtube-nocookie.com/embed/Q4hTg0Tumz0?rel=0" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <a href="http://pyhgx.readthedocs.io/en/latest/index.html" class="btn btn-default btn-lg">Read the docs</a>
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h2 class="section-heading">About Hypergolix</h2>
+                    <h3 class="section-subheading">Hypergolix is like Dropbox, but programmable. It runs as a background service and integrates with your application via localhost IPC. You write high-level application logic, and Hypergolix handles data communication, storage, and security.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4 col-about">
+                    <span class="about-badge">
+                        <i class="fa fa-plane fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Powerful</h4>
+                    <p>Hypergolix has automatic LAN failover, NAT traversal, and more. Monitor your home server from airplane WiFi with 30 minutes of coding.</p>
+                    <a href="https://github.com/Muterra/py_hypergolix_demos" class="btn btn-default btn-lg">See examples</a>
+                </div>
+                <div class="col-md-4 col-about">
+                    <span class="about-badge">
+                        <i class="fa fa-users fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Simple</h4>
+                    <p>With Hypergolix, a peer-to-peer "Hello world" is always two lines of code, no matter what network infrastructure is in the way.</p>
+                    <a href="http://pyhgx.readthedocs.io/en/latest/tuts-2-sharing.html" class="btn btn-default btn-lg">Learn more</a>
+                </div>
+                <div class="col-md-4 col-about">
+                    <span class="about-badge">
+                        <i class="fa fa-lock fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Private</h4>
+                    <p>Hypergolix uses personal, client-side encryption and explicit data removal. Only you control data access and lifetimes.</p>
+                    <a href="https://github.com/Muterra/doc-golix/blob/master/security-whitepaper.md" class="btn btn-default btn-lg">Read the whitepaper</a>
                 </div>
             </div>
         </div>
@@ -251,7 +249,7 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; 2016 <a href="https://www.muterra.io">Muterra, Inc</a>.</p>
+            <p>Copyright &copy; 2017 <a href="https://www.muterra.io">Muterra, Inc</a>.</p>
         </div>
     </footer>
 

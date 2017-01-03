@@ -143,6 +143,8 @@
             });
             
             // Auto-fill the fingerprint from the search string
+            // We don't need to worry about escaping here for XSS, because val
+            // only applies to the actual value part of the DOM
             $('#fingerprint').val(document.location.search.substring(1))
         });
     </script>
@@ -253,7 +255,7 @@
                                             <i class="fa fa-circle fa-stack-2x stack-under"></i>
                                             <i class="fa fa-times fa-stack-1x"></i>
                                         </span>
-                                        <span class="li-content">Limited support</span>
+                                        <span class="li-content">No dedicated support</span>
                                     </li>
                                 </ul>
                             </div>
@@ -310,7 +312,7 @@
                                     <li>
                                         <span class="fa-stack">
                                             <i class="fa fa-circle fa-stack-2x stack-under"></i>
-                                            <i class="fa fa-times fa-stack-1x"></i>
+                                            <i class="fa fa-asterisk fa-stack-1x"></i>
                                         </span>
                                         <span class="li-content">Limited support</span>
                                     </li>

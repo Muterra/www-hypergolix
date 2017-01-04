@@ -120,7 +120,6 @@
                 
                 // If decoding fails, it's invalid
                 catch(err) {
-                    window.alert(err.message)
                     var validated = false
                 }
                 
@@ -321,7 +320,7 @@
                         </div>
                         
                         <!-- Begin checkout form -->
-                        <form id="stripe-form" action="https://papr.hypergolix.com/hgx/" method="post">
+                        <form id="stripe-form" action="https://hgx.hypergolix.com/papr/fingerprint" method="post">
                             <div class="row">
                                 <input class="input-text" type="text" id="fingerprint" name="fingerprint" placeholder="Fingerprint" required />
                             </div>

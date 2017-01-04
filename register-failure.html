@@ -67,15 +67,32 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
     
-    <!-- Stripe stuff -->
+    <!-- Failure reporting stuff -->
+    <script src="js/base64.min.js"></script>
     <script>
         $(document).ready(function() {
             // If we have a search string, it's the error message we received
             var errorMsg = document.location.search.substring(1)
             
             if (errorMsg != '') {
+                // Attempt to decode and validate the fingerprint
+                try {
+                    var decodedErrorMsg = Base64.decode(errorMsg)
+                }
+                
+                // If decoding fails, do nothing.
+                catch(err) {
+                    var decodedErrorMsg = ''
+                }
+            }
+                
+            else {
+                var decodedErrorMsg = ''
+            }
+            
+            if (decodedErrorMsg != '') {
                 // Note that this handles text escaping for us, so we don't need to sanitize it
-                $('#error-msg').text('Specifically, we got the following error: ' + errorMsg)
+                $('#error-msg').text('Specifically, we got the following error: ' + decodedErrorMsg)
             }
         });
     </script>

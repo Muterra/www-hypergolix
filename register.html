@@ -87,9 +87,9 @@
                 // key: 'pk_live_Ur4nhCpzRn8QaTArtylNZWpQ',
                 token: function(token, args) {
                 // Get the token
-                $('#stripe-token').value = token.id;
+                $('#stripe-token').val(token.id);
                 // Get the email
-                $('#stripe-email').value = token.email;
+                $('#stripe-email').val(token.email);
                 // Ignore the args (less PII and we aren't using it)
                 $('#stripe-form').submit();
                 }

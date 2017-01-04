@@ -20,10 +20,8 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="/css/standardize.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     
@@ -55,20 +53,15 @@
     
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
     <!-- Plugin JavaScript -->
     <script src="js/jquery.easing.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
-    
     <!-- Stripe stuff -->
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <script src="js/base64.min.js"></script>
-    
     <script>
         $(document).ready(function() {
             var stripeHandler = StripeCheckout.configure({
@@ -82,7 +75,6 @@
                 billingAddress: true,
 
                 key: 'pk_live_Ur4nhCpzRn8QaTArtylNZWpQ',
-                // key: 'pk_live_Ur4nhCpzRn8QaTArtylNZWpQ',
                 token: function(token, args) {
                 // Get the token
                 $('#stripe-token').val(token.id);
@@ -145,7 +137,6 @@
             $('#fingerprint').val(document.location.search.substring(1))
         });
     </script>
-
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">

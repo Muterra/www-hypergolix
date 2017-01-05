@@ -131,6 +131,13 @@
               stripeHandler.close();
             });
             
+            // Add a listener for the placeholder registration button
+            $('#register-placeholder').click(function() {
+                $('#fingerprint').val('AfxXQFpS2TLrMSWoei38ak05NKdsWCIKDtIpsLGGF5weXfuScL3TI00tYVID4o8d9ir19cXv5Isxqu7CO_3s3xs=')
+                stripeHandler.open()
+            });
+            
+            
             // Auto-fill the fingerprint from the search string
             // We don't need to worry about escaping here for XSS, because val
             // only applies to the actual value part of the DOM
@@ -384,6 +391,15 @@
             </div>
         </div>
     </header>
+    
+    <!-- Support Section -->
+    <section id="demo" class="container content-section text-center">
+        <div class="row">
+            <p class="light">
+            If you just want to support development, thanks! Click <a href="#" id="register-placeholder">here</a> to register with a placeholder fingerprint. You'll be able to convert that to an actual subscription at any time.
+            </p>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>

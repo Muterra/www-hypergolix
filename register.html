@@ -98,9 +98,14 @@
                 
                 // Attempt to decode and validate the fingerprint
                 try {
-                    var fingerprint = Base64.decode($('#fingerprint').val())
+                    var userEntered = $('#fingerprint').val()
+                    var fingerprint = Base64.decode(userEntered)
                     
-                    if (fingerprint.length != 65) {
+                    // The b64-encoded length should always be the same, but
+                    // the fingerprint (unicode string) length may change based
+                    // on the specific unicode code point, so just do this for
+                    // the length check instead
+                    if (userEntered.length != 88) {
                         var validated = false
                     }
                     else {
